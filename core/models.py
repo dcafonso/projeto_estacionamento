@@ -1,4 +1,6 @@
 from django.db import models
+import math
+from django.utils import timezone
 
 
 class Parametro(models.Model):
@@ -40,3 +42,22 @@ class Veiculo(models.Model):
 
     def __str__(self):
         return f'{self.placa} - {self.marca}'
+
+
+class MovtoRotativo(models.Model):
+    entrada = models.DateTimeField(auto_now=False)
+    saida = models.DateTimeField(auto_now=False, null=True, blank=True)
+    valor_hora = models.DecimalField(max_digits=5, decimal_places=2)
+    veiculo = models.ForeignKey('Veiculo', on_delete=models.CASCADE)
+    pago = models.BooleanField(default=False)
+
+    def horas_total(self):
+        # tratamento para qdo não tiver a data da saída, então pega a data e hora atual.
+        saida = self.saida if self.saida != None else timezone.now()
+        return math.ceil((saida - self.entrada).total_seconds() / 3600)
+
+    def valor_total(self):
+        return self.valor_hora * self.horas_total()
+
+    def __str__(self):
+        return f'{self.veiculo}'
