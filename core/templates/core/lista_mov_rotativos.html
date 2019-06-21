@@ -1,0 +1,7 @@
+<h2>Lista Movimentos Rotativos</h2>
+
+<ul>
+    {% for mov_rotativo in mov_rotativos %}
+    <li> {{ mov_rotativo.entrada }} | {{ mov_rotativo.saida }} | {{ mov_rotativo }} </li>
+    {% endfor %}
+</ul>

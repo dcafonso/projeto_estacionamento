@@ -1,0 +1,7 @@
+<h2>Lista Movimentos Mensalistas</h2>
+
+<ul>
+    {% for mov_mensalista in mov_mensalistas %}
+    <li> {{ mov_mensalista.mensalista }} | {{ mov_mensalista.dt_pagto }} | {{ mov_mensalista.valor_pago }} </li>
+    {% endfor %}
+</ul>
