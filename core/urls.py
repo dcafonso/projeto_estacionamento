@@ -1,4 +1,4 @@
-from django.urls import include, re_path
+from django.urls import re_path
 from .views import (
     home,
     lista_pessoas,
@@ -6,6 +6,9 @@ from .views import (
     pessoa_update,
     pessoa_delete,
     lista_veiculos,
+    veiculo_novo,
+    veiculo_update,
+    veiculo_delete,
     lista_mov_rotativos,
     lista_mensalistas,
     lista_mov_mensalistas
@@ -23,6 +26,11 @@ urlpatterns = [
             pessoa_delete, name='core_pessoa_delete'),
 
     re_path(r'^veiculos/$', lista_veiculos, name='core_lista_veiculos'),
+    re_path(r'^veiculos-novo/$', veiculo_novo, name='core_veiculo_novo'),
+    re_path(r'^veiculos-update/(?P<id>\d+)$',
+            veiculo_update, name='core_veiculo_update'),
+    re_path(r'^veiculos-delete/(?P<id>\d+)$',
+            veiculo_delete, name='core_veiculo_delete'),
 
     re_path(r'^mov_rotativos/$', lista_mov_rotativos,
             name='core_lista_mov_rotativos'),

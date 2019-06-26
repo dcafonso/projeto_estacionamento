@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+
 from .models import (
     Pessoa,
     Veiculo,
@@ -7,7 +8,7 @@ from .models import (
     MovtoMensalista
 )
 
-from .forms import PessoaForm
+from .forms import PessoaForm, VeiculoForm
 
 
 def home(request):
@@ -55,19 +56,55 @@ def pessoa_delete(request, id):
 
 def lista_veiculos(request):
     veiculos = Veiculo.objects.all()
-    return render(request, 'core/lista_veiculos.html', {'veiculos': veiculos})
+    form = VeiculoForm()
+    dados = {'veiculos': veiculos, 'form': form}
+    return render(request, 'core/lista_veiculos.html', dados)
+
+
+def veiculo_novo(request):
+    form = VeiculoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+    return redirect('core_lista_veiculos')
+
+
+def veiculo_update(request, id):
+    dados = {}
+    veiculo = Veiculo.objects.get(id=id)
+    form = VeiculoForm(request.POST or None, instance=veiculo)
+    dados['veiculo'] = veiculo
+    dados['form'] = form
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('core_lista_veiculos')
+    else:
+        return render(request, 'core/update_veiculo.html', dados)
+
+
+def veiculo_delete(request, id):
+    veiculo = Veiculo.objects.get(id=id)
+    if request.method == 'POST':
+        veiculo.delete()
+        return redirect('core_lista_veiculos')
+    else:
+        return render(request, 'core/delete_confirm.html', {'obj': veiculo})
 
 
 def lista_mov_rotativos(request):
     mov_rotativos = MovtoRotativo.objects.all()
-    return render(request, 'core/lista_mov_rotativos.html', {'mov_rotativos': mov_rotativos})
+    dados = {'mov_rotativos': mov_rotativos}
+    return render(request, 'core/lista_mov_rotativos.html', dados)
 
 
 def lista_mensalistas(request):
     mensalistas = Mensalista.objects.all()
-    return render(request, 'core/lista_mensalistas.html', {'mensalistas': mensalistas})
+    dados = {'mensalistas': mensalistas}
+    return render(request, 'core/lista_mensalistas.html', dados)
 
 
 def lista_mov_mensalistas(request):
     mov_mensalistas = MovtoMensalista.objects.all()
-    return render(request, 'core/lista_mov_mensalistas.html', {'mov_mensalistas': mov_mensalistas})
+    dados = {'mov_mensalistas': mov_mensalistas}
+    return render(request, 'core/lista_mov_mensalistas.html', dados)
