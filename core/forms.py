@@ -1,5 +1,9 @@
 from django.forms import ModelForm
-from .models import Pessoa, Veiculo
+from .models import (
+    Pessoa, 
+    Veiculo,
+    MovtoRotativo
+)
 
 
 class PessoaForm(ModelForm):
@@ -11,4 +15,10 @@ class PessoaForm(ModelForm):
 class VeiculoForm(ModelForm):
     class Meta:
         model = Veiculo
+        fields = '__all__'
+
+
+class MovtoRotativoForm(ModelForm):
+    class Meta:
+        model = MovtoRotativo
         fields = '__all__'

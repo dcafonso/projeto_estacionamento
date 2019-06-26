@@ -8,7 +8,11 @@ from .models import (
     MovtoMensalista
 )
 
-from .forms import PessoaForm, VeiculoForm
+from .forms import (
+    PessoaForm,
+    VeiculoForm,
+    MovtoRotativoForm,
+)
 
 
 def home(request):
@@ -94,8 +98,40 @@ def veiculo_delete(request, id):
 
 def lista_mov_rotativos(request):
     mov_rotativos = MovtoRotativo.objects.all()
-    dados = {'mov_rotativos': mov_rotativos}
+    form = MovtoRotativoForm()
+    dados = {'mov_rotativos': mov_rotativos, 'form': form}
     return render(request, 'core/lista_mov_rotativos.html', dados)
+
+
+def mov_rotativo_novo(request):
+    form = MovtoRotativoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+    return redirect('core_lista_mov_rotativos')
+
+
+def mov_rotativo_update(request, id):
+    dados = {}
+    mov = MovtoRotativo.objects.get(id=id)
+    form = MovtoRotativoForm(request.POST or None, instance=mov)
+    dados['mov'] = mov
+    dados['form'] = form
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('core_lista_mov_rotativos')
+    else:
+        return render(request, 'core/update_mov_rotativo.html', dados)
+
+
+def mov_rotativo_delete(request, id):
+    mov = MovtoRotativo.objects.get(id=id)
+    if request.method == 'POST':
+        mov.delete()
+        return redirect('core_lista_mov_rotativos')
+    else:
+        return render(request, 'core/delete_confirm.html', {'obj': mov})
 
 
 def lista_mensalistas(request):

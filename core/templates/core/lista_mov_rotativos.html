@@ -1,7 +1,20 @@
-<h2>Lista Movimentos Rotativos</h2>
+<a href="{% url 'core_home' %}">Home</a>
 
+<h2>Movimentos Rotativos</h2>
+<form action="{% url 'core_mov_rotativo_novo' %}" method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+    <button type="submit">Cadastrar</button>
+</form>
+
+<h2>Lista Movimentos Rotativos</h2>
 <ul>
     {% for mov_rotativo in mov_rotativos %}
-    <li> {{ mov_rotativo.entrada }} | {{ mov_rotativo.saida }} | {{ mov_rotativo }} </li>
+    <li> 
+        <a href="{% url 'core_mov_rotativo_update' mov_rotativo.id %}"> 
+            {{ mov_rotativo.entrada }} | {{ mov_rotativo.saida }} | {{ mov_rotativo }} 
+        </a>
+    </li>
     {% endfor %}
 </ul>

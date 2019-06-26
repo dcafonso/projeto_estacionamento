@@ -1,3 +1,5 @@
+<a href="{% url 'core_home' %}">Home</a>
+
 <h2>Veículos</h2>
 <form action="{% url 'core_veiculo_novo' %}" method="POST">
     {% csrf_token %}

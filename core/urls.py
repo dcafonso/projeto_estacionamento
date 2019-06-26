@@ -10,6 +10,9 @@ from .views import (
     veiculo_update,
     veiculo_delete,
     lista_mov_rotativos,
+    mov_rotativo_novo,
+    mov_rotativo_update,
+    mov_rotativo_delete,
     lista_mensalistas,
     lista_mov_mensalistas
 )
@@ -34,6 +37,12 @@ urlpatterns = [
 
     re_path(r'^mov_rotativos/$', lista_mov_rotativos,
             name='core_lista_mov_rotativos'),
+    re_path(r'^mov_rotativos-novo/$', mov_rotativo_novo,
+            name='core_mov_rotativo_novo'),
+    re_path(r'^mov_rotativos-update/(?P<id>\d+)$',
+            mov_rotativo_update, name='core_mov_rotativo_update'),
+    re_path(r'mov_rotativos-delete/(?P<id>\d+)$',
+            mov_rotativo_delete, name='core_mov_rotativo_delete'),
 
     re_path(r'^mensalistas/$', lista_mensalistas,
             name='core_lista_mensalistas'),
