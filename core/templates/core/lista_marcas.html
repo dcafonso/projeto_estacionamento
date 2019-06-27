@@ -1,0 +1,18 @@
+<a href="{% url 'core_home' %}">Home</a>
+
+<h2>Marcas</h2>
+<form action="{% url 'core_marca_novo' %}" method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+    <button type="submit">Cadastrar</button>
+</form>
+
+<h2>Lista Marcas</h2>
+<ul>
+    {% for marca in marcas %}
+    <li>
+        <a href="{% url 'core_marca_update' marca.id %}"> {{ marca.descricao }} </a>
+    </li>
+    {% endfor %}
+</ul>

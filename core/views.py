@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 
 from .models import (
     Pessoa,
+    Marca,
+    CorVeiculo,
     Veiculo,
     MovtoRotativo,
     Mensalista,
@@ -10,6 +12,8 @@ from .models import (
 
 from .forms import (
     PessoaForm,
+    MarcaForm,
+    CorVeiculoForm,
     VeiculoForm,
     MovtoRotativoForm,
     MensalistaForm
@@ -57,6 +61,82 @@ def pessoa_delete(request, id):
         return redirect('core_lista_pessoas')
     else:
         return render(request, 'core/delete_confirm.html', {'obj': pessoa})
+
+
+def lista_marcas(request):
+    marcas = Marca.objects.all()
+    form = MarcaForm()
+    dados = {'marcas': marcas, 'form': form}
+    return render(request, 'core/lista_marcas.html', dados)
+
+
+def marca_novo(request):
+    form = MarcaForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+    return redirect('core_lista_marcas')
+
+
+def marca_update(request, id):
+    dados = {}
+    marca = Marca.objects.get(id=id)
+    form = MarcaForm(request.POST or None, instance=marca)
+    dados['marca'] = marca
+    dados['form'] = form
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('core_lista_marcas')
+    else:
+        return render(request, 'core/update_marca.html', dados)
+
+
+def marca_delete(request, id):
+    marca = Marca.objects.get(id=id)
+    if request.method == 'POST':
+        marca.delete()
+        return redirect('core_lista_marcas')
+    else:
+        return render(request, 'core/delete_confirm.html', {'obj': marca})
+
+
+def lista_cores(request):
+    cores = CorVeiculo.objects.all()
+    form = CorVeiculoForm()
+    dados = {'cores': cores, 'form': form}
+    return render(request, 'core/lista_cores.html', dados)
+
+
+def cor_novo(request):
+    form = CorVeiculoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+    return redirect('core_lista_cores')
+
+
+def cor_update(request, id):
+    dados = {}
+    cor = CorVeiculo.objects.get(id=id)
+    form = CorVeiculoForm(request.POST or None, instance=cor)
+    dados['cor'] = cor
+    dados['form'] = form
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('core_lista_cores')
+    else:
+        return render(request, 'core/update_cor.html', dados)
+
+
+def cor_delete(request, id):
+    cor = CorVeiculo.objects.get(id=id)
+    if request.method == 'POST':
+        cor.delete()
+        return redirect('core_lista_cores')
+    else:
+        return render(request, 'core/delete_confirm.html', {'obj': cor})
 
 
 def lista_veiculos(request):
