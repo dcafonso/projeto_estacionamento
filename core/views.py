@@ -5,9 +5,7 @@ from .models import (
     Marca,
     CorVeiculo,
     Veiculo,
-    MovtoRotativo,
-    Mensalista,
-    MovtoMensalista
+    MovtoRotativo
 )
 
 from .forms import (
@@ -15,8 +13,7 @@ from .forms import (
     MarcaForm,
     CorVeiculoForm,
     VeiculoForm,
-    MovtoRotativoForm,
-    MensalistaForm
+    MovtoRotativoForm
 )
 
 
@@ -213,47 +210,3 @@ def mov_rotativo_delete(request, id):
         return redirect('core_lista_mov_rotativos')
     else:
         return render(request, 'core/delete_confirm.html', {'obj': mov})
-
-
-def lista_mensalistas(request):
-    mensalistas = Mensalista.objects.all()
-    form = MensalistaForm()
-    dados = {'mensalistas': mensalistas, 'form': form}
-    return render(request, 'core/lista_mensalistas.html', dados)
-
-
-def mensalista_novo(request):
-    form = MensalistaForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-    return redirect('core_lista_mensalistas')
-
-
-def mensalista_update(request, id):
-    dados = {}
-    mensalista = Mensalista.objects.get(id=id)
-    form = MensalistaForm(request.POST or None, instance=mensalista)
-    dados['mensalista'] = mensalista
-    dados['form'] = form
-
-    if request.method == 'POST':
-        if form.is_valid():
-            form.save()
-            return redirect('core_lista_mensalistas')
-    else:
-        return render(request, 'core/update_mensalista.html', dados)
-
-
-def mensalista_delete(request, id):
-    mensalista = Mensalista.objects.get(id=id)
-    if request.method == 'POST':
-        mensalista.delete()
-        return redirect('core_lista_mensalistas')
-    else:
-        return render(request, 'core/delete_confirm.html', {'obj': mensalista})
-
-
-def lista_mov_mensalistas(request):
-    mov_mensalistas = MovtoMensalista.objects.all()
-    dados = {'mov_mensalistas': mov_mensalistas}
-    return render(request, 'core/lista_mov_mensalistas.html', dados)

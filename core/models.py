@@ -52,8 +52,9 @@ class MovtoRotativo(models.Model):
     pago = models.BooleanField(default=False)
 
     def horas_total(self):
-        # tratamento para qdo não tiver a data da saída, então pega a data e hora atual.
-        saida = self.saida if self.saida != None else timezone.now()
+        # tratamento para qdo não tiver a data da saída,
+        # então pega a data e hora atual.
+        saida = self.saida if self.saida is not None else timezone.now()
         return math.ceil((saida - self.entrada).total_seconds() / 3600)
 
     def valor_total(self):
@@ -61,21 +62,3 @@ class MovtoRotativo(models.Model):
 
     def __str__(self):
         return f'{self.veiculo}'
-
-
-class Mensalista(models.Model):
-    veiculo = models.ForeignKey('Veiculo', on_delete=models.CASCADE)
-    dtIniMes = models.DateField()
-    valor_mensal = models.DecimalField(max_digits=5, decimal_places=2)
-
-    def __str__(self):
-        return f'{str(self.veiculo)} / {self.veiculo.proprietario}'
-
-
-class MovtoMensalista(models.Model):
-    mensalista = models.ForeignKey('Mensalista', on_delete=models.CASCADE)
-    dt_pagto = models.DateField()
-    valor_pago = models.DecimalField(max_digits=5, decimal_places=2)
-
-    def __str__(self):
-        return str(self.mensalista)

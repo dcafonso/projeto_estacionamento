@@ -5,8 +5,7 @@ from .models import (
     Marca,
     CorVeiculo,
     Veiculo,
-    MovtoRotativo,
-    Mensalista
+    MovtoRotativo
 )
 
 
@@ -37,10 +36,4 @@ class VeiculoForm(ModelForm):
 class MovtoRotativoForm(ModelForm):
     class Meta:
         model = MovtoRotativo
-        fields = '__all__'
-
-
-class MensalistaForm(ModelForm):
-    class Meta:
-        model = Mensalista
         fields = '__all__'

@@ -6,9 +6,7 @@ from .models import (
     Marca,
     CorVeiculo,
     Veiculo,
-    MovtoRotativo,
-    Mensalista,
-    MovtoMensalista
+    MovtoRotativo
 )
 
 
@@ -18,15 +16,9 @@ class MovtoRotativoAdmin(admin.ModelAdmin):
                     )
 
 
-class MovtoMensalistaAdmin(admin.ModelAdmin):
-    list_display = ('mensalista', 'dt_pagto', 'valor_pago')
-
-
 admin.site.register(Parametro)
 admin.site.register(Pessoa)
 admin.site.register(Marca)
 admin.site.register(CorVeiculo)
 admin.site.register(Veiculo)
 admin.site.register(MovtoRotativo, MovtoRotativoAdmin)
-admin.site.register(Mensalista)
-admin.site.register(MovtoMensalista, MovtoMensalistaAdmin)
