@@ -1,18 +1,24 @@
-<a href="{% url 'core_home' %}">Home</a>
+{% extends "base.html" %}
 
-<h2>Cores</h2>
-<form action="{% url 'core_cor_novo' %}" method="POST">
-    {% csrf_token %}
+{% block main %}
+    <a href="{% url 'core_home' %}">Home</a>
 
-    {{ form.as_p }}
-    <button type="submit">Cadastrar</button>
-</form>
+    <h2>Cores</h2>
+    <form action="{% url 'core_cor_novo' %}" method="POST">
+        {% csrf_token %}
 
-<h2>Lista Marcas</h2>
-<ul>
-    {% for cor in cores %}
-    <li>
-        <a href="{% url 'core_cor_update' cor.id %}"> {{ cor.descricao }} </a>
-    </li>
-    {% endfor %}
-</ul>
+        {{ form.as_p }}
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <br>
+
+    <h2>Lista Marcas</h2>
+    <ul>
+        {% for cor in cores %}
+        <li>
+            <a href="{% url 'core_cor_update' cor.id %}"> {{ cor.descricao }} </a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock main %}

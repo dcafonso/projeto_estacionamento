@@ -1,9 +1,13 @@
-<h2>{{ mensagem }}</h2>
+{% extends "base.html" %}
 
-<ul>
-    <li> <a href="{% url 'core_lista_pessoas' %}">Pessoas</a> </li>
-    <li> <a href="{% url 'core_lista_marcas' %}">Marcas</a> </li>
-    <li> <a href="{% url 'core_lista_cores' %}">Cores</a> </li>
-    <li> <a href="{% url 'core_lista_veiculos' %}">Veículos</a> </li>
-    <li> <a href="{% url 'core_lista_mov_rotativos' %}">Movimentos Rotativos</a> </li>
-</ul>
+{% block main %}
+    <h2>{{ mensagem }}</h2>
+    
+    <ul>
+        <li> <a href="{% url 'core_lista_pessoas' %}">Pessoas</a> </li>
+        <li> <a href="{% url 'core_lista_marcas' %}">Marcas</a> </li>
+        <li> <a href="{% url 'core_lista_cores' %}">Cores</a> </li>
+        <li> <a href="{% url 'core_lista_veiculos' %}">Veículos</a> </li>
+        <li> <a href="{% url 'core_lista_mov_rotativos' %}">Movimentos Rotativos</a> </li>
+    </ul>
+{% endblock main %}

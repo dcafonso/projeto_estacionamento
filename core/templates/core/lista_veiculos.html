@@ -1,18 +1,24 @@
-<a href="{% url 'core_home' %}">Home</a>
+{% extends "base.html" %}
 
-<h2>Veículos</h2>
-<form action="{% url 'core_veiculo_novo' %}" method="POST">
-    {% csrf_token %}
+{% block main %}
+    <a href="{% url 'core_home' %}">Home</a>
 
-    {{ form.as_p }}
-    <button type="submit">Cadastrar</button>
-</form>
+    <h2>Veículos</h2>
+    <form action="{% url 'core_veiculo_novo' %}" method="POST">
+        {% csrf_token %}
 
-<h2>Lista Veículos</h2>
-<ul>
-    {% for veiculo in veiculos %}
-    <li>
-        <a href="{% url 'core_veiculo_update' veiculo.id %}"> {{ veiculo }} </a>
-    </li>
-    {% endfor %}
-</ul>
+        {{ form.as_p }}
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <br>
+
+    <h2>Lista Veículos</h2>
+    <ul>
+        {% for veiculo in veiculos %}
+        <li>
+            <a href="{% url 'core_veiculo_update' veiculo.id %}"> {{ veiculo }} </a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock main %}
