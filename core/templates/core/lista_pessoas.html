@@ -1,24 +1,29 @@
 {% extends "base.html" %}
+{% load bootstrap %}
 
 {% block main %}
     <a href="{% url 'core_home' %}">Home</a>
 
-    <h2>Pessoas</h2>
-    <form action="{% url 'core_pessoa_novo' %}" method="POST">
-        {% csrf_token %}
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>Pessoas</h2>
+            <form action="{% url 'core_pessoa_novo' %}" method="POST">
+                {% csrf_token %}
 
-        {{ form.as_p }}
-        <button type="submit">Cadastrar</button>
-    </form>
+                {{ form|bootstrap }}
+                <button type="submit" class="btn btn-outline-primary">Cadastrar</button>
+            </form>
+        </div>
 
-    <br>
-
-    <h2>Lista Pessoas</h2>
-    <ul>
-        {% for pessoa in pessoas %}
-        <li>
-            <a href="{% url 'core_pessoa_update' pessoa.id %}"> {{ pessoa.nome }} </a>
-        </li>
-        {% endfor %}
-    </ul>
+        <div class="col-sm-6">
+            <h2>Lista Pessoas</h2>
+            <ul class="list-group list-group-flush">
+                {% for pessoa in pessoas %}
+                <li class="list-group-item">
+                    <a href="{% url 'core_pessoa_update' pessoa.id %}"> {{ pessoa.nome }} </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>        
+    </div>
 {% endblock main %}
