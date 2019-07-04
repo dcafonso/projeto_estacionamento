@@ -12,6 +12,7 @@
                 {{ form|bootstrap }}
 
                 <button type="submit" class="btn btn-outline-primary">Salvar</button>
+                <a href="{% url 'core_lista_pessoas' %}" class="btn btn-outline-primary">Cancelar</a>
                 <a href="{% url 'core_pessoa_delete' pessoa.id %}" class="btn btn-outline-danger">Deletar</a>
             </form>
         </div>

@@ -1,24 +1,48 @@
 {% extends "base.html" %}
+{% load bootstrap %}
+
+{% block menu %}
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'core_home' %}">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Lançamentos</a>
+            <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'core_lista_pessoas' %}">Pessoas</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'core_lista_marcas' %}">Marcas</a>
+            <a class="dropdown-item" href="{% url 'core_lista_cores' %}">Cores Veículos</a>
+            <a class="dropdown-item" href="{% url 'core_lista_veiculos' %}">Veículos</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'core_lista_mov_rotativos' %}">Movimentos Rotativos</a>
+            </div>
+        </li>
+    </ul>
+{% endblock menu %}
 
 {% block main %}
-    <a href="{% url 'core_home' %}">Home</a>
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>Veículos</h2>
+            <form action="{% url 'core_veiculo_novo' %}" method="POST">
+                {% csrf_token %}
 
-    <h2>Veículos</h2>
-    <form action="{% url 'core_veiculo_novo' %}" method="POST">
-        {% csrf_token %}
+                {{ form|bootstrap }}
 
-        {{ form.as_p }}
-        <button type="submit">Cadastrar</button>
-    </form>
+                <button type="submit" class="btn btn-outline-primary">Cadastrar</button>
+            </form>
+        </div>
 
-    <br>
-
-    <h2>Lista Veículos</h2>
-    <ul>
-        {% for veiculo in veiculos %}
-        <li>
-            <a href="{% url 'core_veiculo_update' veiculo.id %}"> {{ veiculo }} </a>
-        </li>
-        {% endfor %}
-    </ul>
+        <div class="col-sm-6">
+            <h2>Lista Veículos</h2>
+            <ul class="list-group list-group-flush">
+                {% for veiculo in veiculos %}
+                <li class="list-group-item">
+                    <a href="{% url 'core_veiculo_update' veiculo.id %}"> {{ veiculo }} </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 {% endblock main %}
