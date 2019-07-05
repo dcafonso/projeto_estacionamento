@@ -6,18 +6,33 @@
         <li class="nav-item">
             <a class="nav-link active" href="{% url 'core_home' %}">Home</a>
         </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Lançamentos</a>
-            <div class="dropdown-menu">
-            <a class="dropdown-item" href="{% url 'core_lista_pessoas' %}">Pessoas</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'core_lista_marcas' %}">Marcas</a>
-            <a class="dropdown-item" href="{% url 'core_lista_cores' %}">Cores Veículos</a>
-            <a class="dropdown-item" href="{% url 'core_lista_veiculos' %}">Veículos</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'core_lista_mov_rotativos' %}">Movimentos Rotativos</a>
-            </div>
-        </li>
+
+        {% if user.is_authenticated %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Lançamentos</a>
+                <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'core_lista_pessoas' %}">Pessoas</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'core_lista_marcas' %}">Marcas</a>
+                <a class="dropdown-item" href="{% url 'core_lista_cores' %}">Cores Veículos</a>
+                <a class="dropdown-item" href="{% url 'core_lista_veiculos' %}">Veículos</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'core_lista_mov_rotativos' %}">Movimentos Rotativos</a>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link disabled" href="">Olá, {{ user }}</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+        {% endif %}
     </ul>
 {% endblock menu %}
 
