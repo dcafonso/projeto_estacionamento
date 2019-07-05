@@ -36,15 +36,28 @@
 
         <div class="col-sm-6">
             <h2>Lista Movimentos Rotativos</h2>
-            <ul class="list-group list-group-flush">
-                {% for mov_rotativo in mov_rotativos %}
-                <li class="list-group-item"> 
-                    <a href="{% url 'core_mov_rotativo_update' mov_rotativo.id %}"> 
-                        {{ mov_rotativo.entrada }} | {{ mov_rotativo.saida }} | {{ mov_rotativo }} 
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Veículo</th>
+                        <th scope="col">Entrada</th>
+                        <th scope="col">Saída</th>
+                        <th scope="col">Valor Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for mov_rotativo in mov_rotativos %}
+                        <tr>
+                            <th scope="row"> 
+                                <a href="{% url 'core_mov_rotativo_update' mov_rotativo.id %}"> {{ mov_rotativo }} </a>
+                            </th>
+                            <th>{{ mov_rotativo.entrada }}</th>
+                            <th>{{ mov_rotativo.saida }}</th>
+                            <th>{{ mov_rotativo.valor_total }}</th>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 {% endblock main %}

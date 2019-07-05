@@ -36,13 +36,26 @@
 
         <div class="col-sm-6">
             <h2>Lista Veículos</h2>
-            <ul class="list-group list-group-flush">
-                {% for veiculo in veiculos %}
-                <li class="list-group-item">
-                    <a href="{% url 'core_veiculo_update' veiculo.id %}"> {{ veiculo }} </a>
-                </li>
-                {% endfor %}
-            </ul>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Placa</th>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Cor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for veiculo in veiculos %}
+                        <tr>
+                            <th scope="row">
+                                <a href="{% url 'core_veiculo_update' veiculo.id %}"> {{ veiculo.placa }} </a>
+                            </th>
+                            <th>{{ veiculo.marca }}</th>
+                            <th>{{ veiculo.cor }}</th>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 {% endblock main %}
