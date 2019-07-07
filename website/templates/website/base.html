@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>Website Estacionamento</title>
+<head>
+<body>
+    <div class="container">
+        <h1>Bem vindo ao website</h1>
+
+        <div class="row">
+            <div class="col-6">
+                <h2>Estacionamento 24 horas</h2>
+                <span>Slogan da empresa</span>
+            </div>
+
+            <div class="col-6">
+                <img src="{% static 'img/estacionamento.png' %}" alt="Estacionamento 24horas" id="imagem">
+            </div>
+        </div>
+
+        {% block menu %}
+        {% endblock menu %}
+
+        {% block main %}
+        {% endblock main %}
+
+        {% include "website/footer.html" %}
+    </div>
+</body>
+</html>

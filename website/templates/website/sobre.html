@@ -1,0 +1,75 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block menu %}
+    <div class="row row-space">
+        <div class="col-12">
+            <ul class="nav nav-pills nav-fill">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'website_home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'website_servicos' %}">Serviços</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'website_planos' %}">Planos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'website_sobre' %}">Sobre</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'website_contato' %}">Contato</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'core_home' %}">Sistema</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock menu %}
+
+{% block main %}
+    <div class="row row-space">
+        <div class="col" id="texto">
+            Mussum Ipsum, cacilds vidis litro abertis. Em pé sem cair, deitado sem dormir, sentado sem cochilar e fazendo pose. 
+            Suco de cevadiss deixa as pessoas mais interessantis. Casamentiss faiz malandris se pirulitá. Interagi no mé, cursus 
+            quis, vehicula ac nisi.
+
+            Mais vale um bebadis conhecidiss, que um alcoolatra anonimis. Admodum accumsan disputationi eu sit. 
+            Vide electram sadipscing et per. Per aumento de cachacis, eu reclamis. Tá deprimidis, eu conheço uma 
+            cachacis que pode alegrar sua vidis.
+
+            Praesent malesuada urna nisi, quis volutpat erat hendrerit non. Nam vulputate dapibus. Detraxit 
+            consequat et quo num tendi nada. Quem manda na minha terra sou euzis! Quem num gosta di mé, boa 
+            gentis num é.
+
+            Mussum Ipsum, cacilds vidis litro abertis. Leite de capivaris, leite de mula manquis sem cabeça. 
+            Per aumento de cachacis, eu reclamis. Nullam volutpat risus nec leo commodo, ut interdum diam laoreet. 
+            Sed non consequat odio. Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu levo!
+
+            Mé faiz elementum girarzis, nisi eros vermeio. Viva Forevis aptent taciti sociosqu ad litora torquent. 
+            Si u mundo tá muito paradis? Toma um mé que o mundo vai girarzis! Mais vale um bebadis conhecidiss, 
+            que um alcoolatra anonimis.
+        </div>
+    </div>
+
+    <div class="row row-space">
+        <div class="col" id="texto">
+            Praesent malesuada urna nisi, quis volutpat erat hendrerit non. Nam vulputate dapibus. Detraxit 
+            consequat et quo num tendi nada. Quem manda na minha terra sou euzis! Quem num gosta di mé, boa 
+            gentis num é.
+
+            Mussum Ipsum, cacilds vidis litro abertis. Leite de capivaris, leite de mula manquis sem cabeça. 
+            Per aumento de cachacis, eu reclamis. Nullam volutpat risus nec leo commodo, ut interdum diam laoreet. 
+            Sed non consequat odio. Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu levo!
+
+            Mé faiz elementum girarzis, nisi eros vermeio. Viva Forevis aptent taciti sociosqu ad litora torquent. 
+            Si u mundo tá muito paradis? Toma um mé que o mundo vai girarzis! Mais vale um bebadis conhecidiss, 
+            que um alcoolatra anonimis.
+        </div>
+        
+        <div class="col-4">
+            <img src="{% static 'img/estacionamento.png' %}" alt="Estacionamento 24horas - Sobre">
+        </div>
+    </div>
+{% endblock main %}

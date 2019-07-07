@@ -26,7 +26,7 @@ from .views import (
 
 
 urlpatterns = [
-    re_path(r'^$', home, name='core_home'),
+    re_path(r'^sistema/$', home, name='core_home'),
 
     re_path(r'^pessoas/$', lista_pessoas, name='core_lista_pessoas'),
     re_path(r'^pessoas-novo/$', pessoa_novo, name='core_pessoa_novo'),

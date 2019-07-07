@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 from .models import (
     Pessoa,
@@ -18,7 +19,7 @@ from .forms import (
 
 
 def home(request):
-    context = {'mensagem': 'Estacionamento | Página Principal'}
+    context = {'mensagem': 'Estacionamento | Sistema'}
     return render(request, 'core/index.html', context)
 
 
