@@ -1,6 +1,5 @@
 from django.db import models
 import math
-from django.utils import timezone
 
 
 class Parametro(models.Model):
@@ -54,7 +53,7 @@ class MovtoRotativo(models.Model):
     def horas_total(self):
         # tratamento para qdo não tiver a data da saída,
         # então pega a data e hora atual.
-        saida = self.saida if self.saida is not None else timezone.now()
+        saida = self.saida if self.saida is not None else self.entrada
         return math.ceil((saida - self.entrada).total_seconds() / 3600)
 
     def valor_total(self):
