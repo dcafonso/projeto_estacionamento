@@ -2,16 +2,20 @@
 {% load bootstrap %}
 
 {% block main %}
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">Login</div>
+    <div class="container-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="card card bg-light mb-3">
+                        <div class="card-header card text-white bg-primary mb-3">
+                            Login
+                        </div>
+
                         <div class="card-body">
                             {% if form.errors %}
                                 <p>Usuário e senha não encontrados! Tente novamente.</p>
                             {% endif %}
-                            
+                                
                             {% if next %}
                                 {% if user.is_authenticated %}
                                     <p>Your account doesn't have access to this page. To proceed,

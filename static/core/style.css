@@ -1,0 +1,16 @@
+.container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-center {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    padding: 100px;
+    resize: both;
+    overflow: auto;    
+}

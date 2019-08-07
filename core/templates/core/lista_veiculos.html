@@ -6,56 +6,75 @@
         <li class="nav-item">
             <a class="nav-link" href="{% url 'core_home' %}">Home</a>
         </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Lançamentos</a>
-            <div class="dropdown-menu">
-            <a class="dropdown-item" href="{% url 'core_lista_pessoas' %}">Pessoas</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'core_lista_marcas' %}">Marcas</a>
-            <a class="dropdown-item" href="{% url 'core_lista_cores' %}">Cores Veículos</a>
-            <a class="dropdown-item" href="{% url 'core_lista_veiculos' %}">Veículos</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{% url 'core_lista_mov_rotativos' %}">Movimentos Rotativos</a>
-            </div>
-        </li>
+
+        {% if user.is_authenticated %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Lançamentos</a>
+                <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'core_lista_pessoas' %}">Pessoas</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'core_lista_marcas' %}">Marcas</a>
+                <a class="dropdown-item" href="{% url 'core_lista_cores' %}">Cores Veículos</a>
+                <a class="dropdown-item" href="{% url 'core_lista_veiculos' %}">Veículos</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'core_lista_mov_rotativos' %}">Movimentos Rotativos</a>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link disabled" href="">Olá, {{ user }}</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+        {% endif %}
     </ul>
 {% endblock menu %}
 
 {% block main %}
     <div class="row">
         <div class="col-sm-6">
-            <h2>Veículos</h2>
-            <form action="{% url 'core_veiculo_novo' %}" method="POST">
-                {% csrf_token %}
+            <div class="alert alert-light" role="alert">
+                <h2>Veículos</h2>
+                <form action="{% url 'core_veiculo_novo' %}" method="POST">
+                    {% csrf_token %}
 
-                {{ form|bootstrap }}
+                    {{ form|bootstrap }}
 
-                <button type="submit" class="btn btn-outline-primary">Cadastrar</button>
-            </form>
+                    <button type="submit" class="btn btn-outline-primary">Cadastrar</button>
+                </form>
+            </div>
         </div>
 
         <div class="col-sm-6">
-            <h2>Lista Veículos</h2>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Placa</th>
-                        <th scope="col">Marca</th>
-                        <th scope="col">Cor</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for veiculo in veiculos %}
+            <div class="alert alert-light" role="alert">
+                <h2>Lista Veículos</h2>
+                <table class="table table-hover">
+                    <thead>
                         <tr>
-                            <th scope="row">
-                                <a href="{% url 'core_veiculo_update' veiculo.id %}"> {{ veiculo.placa }} </a>
-                            </th>
-                            <th>{{ veiculo.marca }}</th>
-                            <th>{{ veiculo.cor }}</th>
+                            <th scope="col">Placa</th>
+                            <th scope="col">Marca</th>
+                            <th scope="col">Cor</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% for veiculo in veiculos %}
+                            <tr>
+                                <th scope="row">
+                                    <a href="{% url 'core_veiculo_update' veiculo.id %}"> {{ veiculo.placa }} </a>
+                                </th>
+                                <th>{{ veiculo.marca }}</th>
+                                <th>{{ veiculo.cor }}</th>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 {% endblock main %}

@@ -4,13 +4,16 @@
 {% block main %}
     <div class="row">
         <div class="col">
-            <h2>Tem certeza que deseja deletar {{ obj }} ?</h2>
+            <div class="alert alert-light" role="alert">
+                <h2>Tem certeza que deseja deletar {{ obj }} ?</h2>
 
-            <form method="POST">
-                {% csrf_token %}
-
-                <button type="submit" class="btn btn-outline-danger">Deletar</button>
-            </form>
+                <form method="POST">
+                    {% csrf_token %}
+                    
+                    <a href="{% url 'core_lista_pessoas' %}" class="btn btn-outline-primary">Cancelar</a>
+                    <button type="submit" class="btn btn-outline-danger">Deletar</button>
+                </form>
+            </div>
         </div>
     </div>
 {% endblock main %}
